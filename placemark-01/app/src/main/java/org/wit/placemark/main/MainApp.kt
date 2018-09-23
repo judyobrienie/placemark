@@ -10,9 +10,13 @@ class MainApp : Application(), AnkoLogger {
   val placemarks = ArrayList<PlacemarkModel>()
 
 
-
   override fun onCreate() {
     super.onCreate()
     info("Placemark started")
+    //placemarks.add(PlacemarkModel("One", "About one..."))
+    //placemarks.add(PlacemarkModel("Two", "About two..."))
+   // placemarks.add(PlacemarkModel("Three", "About three..."))
   }
+
+
 }
