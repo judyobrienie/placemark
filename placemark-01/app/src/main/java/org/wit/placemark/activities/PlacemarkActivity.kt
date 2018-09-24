@@ -38,7 +38,10 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         app.placemarks.add(placemark.copy())
         info("add Button Pressed: $placemarkTitle")
         app.placemarks.forEach { info("add Button Pressed: ${it}")}
+
+        //set result of activity
         setResult(AppCompatActivity.RESULT_OK)
+        //finish
         finish()
       }
 
@@ -55,9 +58,10 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     return super.onCreateOptionsMenu(menu)
   }
 
-  //when the item is pressed ie cancel - finish
+  //when the item on the menu is pressed
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     when (item?.itemId) {
+      //when cancel is pressed finish
       R.id.item_cancel -> finish()
     }
     return super.onOptionsItemSelected(item)
