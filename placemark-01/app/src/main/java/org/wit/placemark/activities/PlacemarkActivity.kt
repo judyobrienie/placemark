@@ -22,12 +22,17 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_placemark)
+    setSupportActionBar(toolbarAdd)
     app = application as MainApp
 
 
+
+
     btnAdd.setOnClickListener() {
+
       placemark.title = placemarkTitle.text.toString()
       placemark.description = placemarkDescription.text.toString()
+
       if (placemark.title.isNotEmpty()) {
         app.placemarks.add(placemark.copy())
         info("add Button Pressed: $placemarkTitle")
