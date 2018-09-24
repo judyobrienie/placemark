@@ -22,6 +22,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_placemark)
+    //set new menu
     setSupportActionBar(toolbarAdd)
     app = application as MainApp
 
@@ -54,6 +55,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     return super.onCreateOptionsMenu(menu)
   }
 
+  //when the item is pressed ie cancel - finish
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     when (item?.itemId) {
       R.id.item_cancel -> finish()

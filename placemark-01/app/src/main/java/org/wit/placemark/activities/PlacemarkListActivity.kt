@@ -20,14 +20,16 @@ class PlacemarkListActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_placemark_list)
+    //set up menu bar
+    toolbarMain.title = title
+    setSupportActionBar(toolbarMain)
     app = application as MainApp
 
     val layoutManager = LinearLayoutManager(this)
     recyclerView.layoutManager = layoutManager
     recyclerView.adapter = PlacemarkAdapter(app.placemarks)
 
-    toolbarMain.title = title
-    setSupportActionBar(toolbarMain)
+
   }
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
     menuInflater.inflate(R.menu.menu_main, menu)
