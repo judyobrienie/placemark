@@ -22,7 +22,8 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_placemark)
-    //set new menu
+    //set new toobar
+    toolbarAdd.title = title
     setSupportActionBar(toolbarAdd)
     app = application as MainApp
 
@@ -52,17 +53,18 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 
   }
 
-
+  //inflate the menu
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
     menuInflater.inflate(R.menu.menu_placemarkactivity, menu)
     return super.onCreateOptionsMenu(menu)
   }
 
-  //when the item on the menu is pressed
+  //when the item on the menu is pressed - handling the event
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     when (item?.itemId) {
       //when cancel is pressed finish
-      R.id.item_cancel -> finish()
+      R.id.item_cancel ->
+        finish()
     }
     return super.onOptionsItemSelected(item)
   }
