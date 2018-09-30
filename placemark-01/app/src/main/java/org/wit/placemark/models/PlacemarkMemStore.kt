@@ -24,6 +24,7 @@ class PlacemarkMemStore : PlacemarkStore, AnkoLogger {
 
   //log all placemarks. Call it whenever a new placemark is added
   override fun create(placemark: PlacemarkModel) {
+    placemark.id = getId()
     placemarks.add(placemark)
     logAll()
   }

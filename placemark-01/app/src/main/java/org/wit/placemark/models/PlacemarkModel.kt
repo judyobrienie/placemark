@@ -8,6 +8,6 @@ import kotlinx.android.parcel.Parcelize
 
 //using id to idenify placemarks for edit purposes
 @Parcelize
-data class PlacemarkModel(var id:Long = 0,
+data class PlacemarkModel(var id: Long = 0,
                           var title: String = "",
                           var description: String = "") : Parcelable

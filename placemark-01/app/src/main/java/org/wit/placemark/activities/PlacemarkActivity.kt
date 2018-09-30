@@ -14,6 +14,7 @@ import org.wit.placemark.R
 
 import org.wit.placemark.main.MainApp
 import org.wit.placemark.models.PlacemarkModel
+import org.wit.placemark.models.getId
 
 class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 
@@ -57,7 +58,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
       }
 
       else {
-        toast ("Please Enter a title")
+         toast( this.getString(R.string.hint_enterATitle));
       }
     }
 

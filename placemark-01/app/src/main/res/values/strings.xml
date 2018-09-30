@@ -6,5 +6,7 @@
   <string name="menu_addPlacemark">Add</string>
   <string name="menu_cancelPlacemark">Cancel</string>
 
+  <string name="hint_enterATitle">Please Enter a title</string>
+
 </resources>
 
