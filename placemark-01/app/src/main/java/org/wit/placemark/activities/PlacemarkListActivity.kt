@@ -5,13 +5,16 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
 import kotlinx.android.synthetic.main.activity_placemark_list.*
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 import org.wit.placemark.R
 import org.wit.placemark.adapters.PlacemarkAdapter
+import org.wit.placemark.adapters.PlacemarkListener
 import org.wit.placemark.main.MainApp
+import org.wit.placemark.models.PlacemarkModel
 
 
-class PlacemarkListActivity : AppCompatActivity() {
+class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
 
   lateinit var app: MainApp
 
@@ -25,8 +28,13 @@ class PlacemarkListActivity : AppCompatActivity() {
 
     val layoutManager = LinearLayoutManager(this)
     recyclerView.layoutManager = layoutManager
-    recyclerView.adapter = PlacemarkAdapter(app.placemarks)
 
+
+    /*
+    recyclerView.adapter = PlacemarkAdapter(app.placemarks)
+    using encapsulated from models - PlacemarkMemStore          /// the 'this' add Placemarkistener
+    */
+    recyclerView.adapter = PlacemarkAdapter(app.placemarks.findAll(),this)
 
   }
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -39,6 +47,14 @@ class PlacemarkListActivity : AppCompatActivity() {
     }
     return super.onOptionsItemSelected(item)
 
+  }
+
+  /*implementing the new placemarkListener interface
+  override fun onPlacemarkClick(placemark: PlacemarkModel) {
+    startActivityForResult(intentFor<PlacemarkActivity>(), 0)
+  }*/
+  override fun onPlacemarkClick(placemark: PlacemarkModel) {
+    startActivityForResult(intentFor<PlacemarkActivity>().putExtra("placemark_edit", placemark), 0)
   }
 
 }

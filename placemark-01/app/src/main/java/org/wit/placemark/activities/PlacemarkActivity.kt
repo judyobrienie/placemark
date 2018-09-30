@@ -11,6 +11,7 @@ import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 import org.wit.placemark.R
 
+
 import org.wit.placemark.main.MainApp
 import org.wit.placemark.models.PlacemarkModel
 
@@ -27,7 +28,11 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     setSupportActionBar(toolbarAdd)
     app = application as MainApp
 
-
+    if (intent.hasExtra("placemark_edit")) {
+      placemark = intent.extras.getParcelable<PlacemarkModel>("placemark_edit")
+      placemarkTitle.setText(placemark.title)
+      placemarkDescription.setText(placemark.description)
+    }
 
 
     btnAdd.setOnClickListener() {
@@ -36,9 +41,14 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
       placemark.description = placemarkDescription.text.toString()
 
       if (placemark.title.isNotEmpty()) {
-        app.placemarks.add(placemark.copy())
+
+        //app.placemarks.add(placemark.copy())
+        app.placemarks.create(placemark.copy())
+
         info("add Button Pressed: $placemarkTitle")
-        app.placemarks.forEach { info("add Button Pressed: ${it}")}
+       // app.placemarks.forEach { info("add Button Pressed: ${it}")}
+        ////////removing logging as it was moved to PlarkmarkMemStore
+       // app.placemarks.findAll().forEach{ info("add Button Pressed: ${it}") }
 
         //set result of activity
         setResult(AppCompatActivity.RESULT_OK)
@@ -68,5 +78,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     }
     return super.onOptionsItemSelected(item)
   }
+
+
 
 }
