@@ -2,6 +2,7 @@ package org.wit.placemark.activities
 
 import android.app.PendingIntent.getActivity
 import android.os.Bundle
+import android.provider.SyncStateContract.Helpers.update
 import android.support.v7.app.AppCompatActivity
 import android.text.Layout
 import android.view.Menu
@@ -36,14 +37,9 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     var edit = false;
     if (intent.hasExtra("placemark_edit")) {
       placemark = intent.extras.getParcelable<PlacemarkModel>("placemark_edit")
-
-      info("IDCode: ${placemark.id}")
-
-
-
       placemarkTitle.setText(placemark.title)
       placemarkDescription.setText(placemark.description)
-      btnAdd.setText(this.getString(R.string.button_savePlacemark));
+      btnAdd.setText(R.string.button_savePlacemark)
       edit = true;
     }
 
@@ -52,24 +48,20 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
       placemark.description = placemarkDescription.text.toString()
 
       if (placemark.title.isNotEmpty()) {
-        if (edit==true){
-          btnAdd.setText(R.string.button_savePlacemark);
+        if (edit){
+          btnAdd.setText(R.string.button_savePlacemark)
+          app.placemarks.update(placemark.copy())
         }
-
-        //app.placemarks.add(placemark.copy())
-        app.placemarks.create(placemark.copy());
-
-
-        info("add Button Pressed: $placemarkTitle")
-
+        else{
+          app.placemarks.create(placemark.copy())
+        }
         //set result of activity
         setResult(AppCompatActivity.RESULT_OK)
-
       //if button pressed again then finish
         finish()
       }
       else {
-        toast (R.string.hint_enterATitle);
+        toast (R.string.hint_enterATitle)
       }
     }
   }
