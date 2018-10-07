@@ -1,6 +1,7 @@
 package org.wit.placemark.activities
 
 import android.app.PendingIntent.getActivity
+import android.content.Intent
 import android.os.Bundle
 import android.provider.SyncStateContract.Helpers.update
 import android.support.v7.app.AppCompatActivity
@@ -15,6 +16,8 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 import org.wit.placemark.R
+import org.wit.placemark.helpers.readImage
+import org.wit.placemark.helpers.showImagePicker
 import org.wit.placemark.main.MainApp
 import org.wit.placemark.models.PlacemarkModel
 
@@ -23,6 +26,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 
   var placemark = PlacemarkModel()
   lateinit var app : MainApp
+  val IMAGE_REQUEST = 1
 
 
 
@@ -41,6 +45,10 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
       placemarkDescription.setText(placemark.description)
       btnAdd.setText(R.string.button_savePlacemark)
       edit = true;
+    }
+
+    chooseImage.setOnClickListener {
+      showImagePicker(this, IMAGE_REQUEST)
     }
 
     btnAdd.setOnClickListener() {
@@ -66,6 +74,9 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     }
   }
 
+
+
+
   //inflate the menu
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
     menuInflater.inflate(R.menu.menu_placemarkactivity, menu)
@@ -82,6 +93,18 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     return super.onOptionsItemSelected(item)
   }
 
+  //recover the image name when the activity picker activity finishes
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+    when (requestCode) {
+      IMAGE_REQUEST -> {
+        if (data != null) {
+          placemark.image = data.getData().toString()
+          placemarkImage.setImageBitmap(readImage(this, resultCode, data))
+        }
+      }
+    }
+  }
 
 
 }
