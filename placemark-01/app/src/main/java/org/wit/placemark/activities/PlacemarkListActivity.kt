@@ -5,12 +5,16 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
+import kotlinx.android.synthetic.main.activity_placemark.*
 import kotlinx.android.synthetic.main.activity_placemark_list.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 import org.wit.placemark.R
+import org.wit.placemark.R.id.placemarkImage
 import org.wit.placemark.adapters.PlacemarkAdapter
 import org.wit.placemark.adapters.PlacemarkListener
+import org.wit.placemark.helpers.readImage
+import org.wit.placemark.helpers.readImageFromPath
 import org.wit.placemark.main.MainApp
 import org.wit.placemark.models.PlacemarkModel
 
@@ -18,6 +22,9 @@ import org.wit.placemark.models.PlacemarkModel
 class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
 
   lateinit var app: MainApp
+
+
+
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -29,6 +36,8 @@ class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
 
     val layoutManager = LinearLayoutManager(this)
     recyclerView.layoutManager = layoutManager
+
+
 
 
     /*
@@ -63,6 +72,9 @@ class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
     recyclerView.adapter?.notifyDataSetChanged()
     super.onActivityResult(requestCode, resultCode, data)
   }
+
+
+
 
 }
 

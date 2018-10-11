@@ -45,6 +45,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
       placemarkTitle.setText(placemark.title)
       placemarkDescription.setText(placemark.description)
       btnAdd.setText(R.string.button_savePlacemark)
+      chooseImage.setText(R.string.button_saveImage)
       //adding image to edit mode
       placemarkImage.setImageBitmap(readImageFromPath(this, placemark.image))
       edit = true;
